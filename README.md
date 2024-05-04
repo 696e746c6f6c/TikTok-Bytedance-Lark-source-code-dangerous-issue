@@ -1,0 +1,1 @@
+Recently we have discovered few TikTok's Lark subdomains (https://www.feishu.cn/ & https://people.bytedance.net) sharing the same endpoints with the same parameter which is supposed to redirect users to malicious pages and such eval() function which is the un-trusted data type is being used. But why does XSS fails here?
