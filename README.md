@@ -48,4 +48,14 @@ var BFP = __webpack_require__(6825)
         ))
     }
 ```
+Here you can see this `collectFingerprintInfo` function is being defined with empty parameter and at the end we can see dangerous `eval()` function un-trusted data type being evaluated/executed at the end following this code snippet:
+```javascript
+ collectFingerprintInfo().then((function(result) {
+            eval("window.function_name_01")(result)
+        }
+```
+Here `collectFingerprintInfo()` gets invoked and it was likely waiting for a Promise because of `.then` argument being used to handle the asynchronous `res` which defines another function and takes a result as a parameter and after that its trying to call a function called `function_name_01` of the global window object but it fails because of the invalid syntax and XSS can't happen here. If it wasnt using `eval()` which always require double quotes for such execution of the string in js code then XSS would happen and then at the end it calls the result function with it's argument.
+
+
+
 
