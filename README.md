@@ -54,8 +54,12 @@ Here you can see this `collectFingerprintInfo` function is being defined with em
             eval("window.function_name_01")(result)
         }
 ```
-Here `collectFingerprintInfo()` gets invoked and it was likely waiting for a Promise because of `.then` argument being used to handle the asynchronous `res` which defines another function and takes a result as a parameter and after that its trying to call a function called `function_name_01` of the global window object but it fails because of the invalid syntax and XSS can't happen here. If it wasnt using `eval()` which always require double quotes for such execution of the string in js code then XSS would happen and then at the end it calls the result function with it's argument.
-
+Here `collectFingerprintInfo()` gets invoked and it was likely waiting for a Promise because of `.then` argument being used to handle the asynchronous `res` which defines another function and takes a result as a parameter and after that its trying to call a function called `function_name_01` of the global window object but it fails because of the invalid syntax and XSS can't happen here. However `eval()` doesn't fail to be executed here due to this following code snippet:
+```javascript
+function function_name_01(t) {
+    return ("undefined" == typeof window ? global : window)._$jsvmprt("484e4f4a403f524300143423dfb57089d801749a00000000000000dc1b001b000b021a001d00011b000b07201d00021b000b07221e0003240200040200050a0002101c1b000b07221e0006241b000b031b000b04221e000724131e00081a00221b000b061d00092202000a1d000b22131e000c22011700071c02000d1d000e0a000110040a0001101c00000f0001700f302e332f043522232229332e262b3404283722290417081413412f333337347d68682b28207e6a352237283533693d2e2d2e2226372e6924282a682a28292e33283518253528303422356824282b2b22243368317568252633242f0434222923093433352e29202e213e0608252d22243304232633260924282b2b222433283503332620091715080d0204130e03032b282003372e23", [, , "undefined" != typeof XMLHttpRequest ? XMLHttpRequest : void 0, void 0 !== encrypt ? encrypt : void 0, "undefined" != typeof JSON ? JSON : void 0, function_name_01, t])
+}
+```
 
 
 
