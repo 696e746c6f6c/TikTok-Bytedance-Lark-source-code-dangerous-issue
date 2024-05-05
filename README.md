@@ -163,4 +163,5 @@ return function (t, e) {
         }
       }
 ```
+Let's read this code snippet in the depth of the analysis. First of all the function has two parameters `t` and `e`. It extracts some properties from `t` such as `auth`, `query`, `hostname`, `protocol`, and `port`. Another thing is if the port is not specified it sets `a` to `e.port` property. It checks if the hostname is `0.0.0.0` or `::` and the protocol of `e` must start with `http`. If that's true then it updates `i` to `e.hostname`. But if not, it checks if `i` is not empty, not `127.0.0.1` ipv4 and `e.protocol` is not `https:` or `t.hostname` is `0.0.0.0`. If true, it updates s to `e.protocol`. It assigns values to `u` & `c` and l based on properties in `o`. If `l` is `location`, it updates `l` to `e.port`. And then it finally returns a formatted URL string using the `n.format` function with the updated properties.
 
