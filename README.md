@@ -118,4 +118,49 @@ var s = /^([a-z0-9.+-]+:)/i,
           'file:': !0
         },
 ```
+variable `s`, this regex expression gets assigned at it maches `http:` and `https:` schemes which introduces open redirection on these subdomains. `a` variable goes with port and etc. But however we can see some arrays and objects. But wait notice `v` object which provides this:
+```javascript
+ javascript: !0,
+'javascript:': !0
+```
+and same for `g` object. This means that javascript schemes are allowed but in our case no? Why are these declarations used in URL parsing mostly `g` object if app doesn't support javascript scheme by itself?
+```javascript
+return function (t, e) {
+            var r = t.auth,
+            o = t.query,
+            i = t.hostname,
+            s = t.protocol,
+            a = t.port;
+            a &&
+            '0' !== a ||
+            (a = e.port),
+            '0.0.0.0' !== i &&
+            '::' !== i ||
+            !e.hostname ||
+            0 !== e.protocol.indexOf('http') ||
+            (i = e.hostname),
+            !i ||
+            '127.0.0.1' === i ||
+            'https:' !== e.protocol &&
+            '0.0.0.0' !== t.hostname ||
+            (s = e.protocol);
+            var u = o.sockHost ||
+            i,
+            c = o.sockPath ||
+            '/sockjs-node',
+            l = o.sockPort ||
+            a;
+            return 'location' === l &&
+            (l = e.port),
+            n.format({
+              protocol: s,
+              auth: r,
+              hostname: u,
+              port: l,
+              pathname: c
+            })
+          }(r, e = 'string' == typeof e && '' !== e ? n.parse(e) : self.location)
+        }
+      }
+```
 
