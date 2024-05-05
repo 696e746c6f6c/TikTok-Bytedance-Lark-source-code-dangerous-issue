@@ -167,4 +167,4 @@ Let's read this code snippet in the depth of the analysis. First of all the func
 
 So, open redirection does occurs on these assets with some hidden endpoints and one parameter which I would not like to disclose but it disallows `javascript:` protocol by any chance. Once we use `javascript:` protocol `eval()` un-trusted data type is being evaluated/executed immediately but on web page `oncall` event handler is being presented which is a `null` in my opinion as it performs different redirection to non-existent bytedance page -- which means we can't get XSS by any possible chance here. Only open redirection which is useless.
 
-I was impressed when I saw this good security.
+I was impressed when I saw this good security. However the interesting thing is how is this being handled on back-end either. Really curious which is a un-resolved mystery story. 
